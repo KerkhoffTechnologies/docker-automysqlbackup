@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Set up /etc/default/automysqlbackup configuration from the environment.
+mkdir --parent /etc/default/
+
+cat > /etc/default/automysqlbackup <<- EOF
+USERNAME=${USERNAME}
+PASSWORD=${MYSQL_ROOT_PASSWORD}
+DBHOST=${DBHOST}
+DBNAMES="${DBNAMES}"
+BACKUPDIR="${BACKUPDIR}"
+MAILCONTENT="${MAILCONTENT}"
+MAXATTSIZE="${MAXATTSIZE}"
+MAILADDR="${MAILADDR}"
+MDBNAMES="${MDBNAMES}"
+DBEXCLUDE="${DBEXCLUDE}"
+CREATE_DATABASE=${CREATE_DATABASE}
+SEPDIR=${SEPDIR}
+EOF
+cat /etc/default/automysqlbackup

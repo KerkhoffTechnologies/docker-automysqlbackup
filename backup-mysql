@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Set up /etc/default/automysqlbackup with configuration from the environment, 
+# and then run automysqlbackup.
+# Configuring it this way allows us to use values specified in the
+# environment and to avoid making any changes to automysqlbackup from
+# upstream.
+# Depends on /etc/automysqlbackup as an envdir-style directory- see
+# https://cr.yp.to/daemontools/envdir.html. This is because SSH doesn't pass
+# most environment variables through to shells.
+
+envdir /etc/automysqlbackup /usr/local/bin/configure-automysqlbackup
+/usr/local/bin/automysqlbackup
