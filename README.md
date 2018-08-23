@@ -1,19 +1,19 @@
-# docker-autopostgresqlbackup
+# docker-automysqlbackup
 
-Alpine-based Docker that includes OpenSSH and autopostgresqlbackup script.
+Alpine-based Docker that includes OpenSSH and automysqlbackup script.
 
-The `autopostgresqlbackup` script was taken from 
-[Debian](https://packages.debian.org/stretch/autopostgresqlbackup) and not its home at [SourceForge](https://sourceforge.net/projects/autopgsqlbackup/)
-because the Deb version has sensible improvements, such as commenting out some example configurations, and loading settings from `/etc/default/autopostgresqlbackup`.
+The `automysqlbackup` script was taken from 
+[Debian](https://packages.debian.org/stretch/automysqlbackup) and not its home at [SourceForge](https://sourceforge.net/projects/autopgsqlbackup/)
+because the Deb version has sensible improvements, such as commenting out some example configurations, and loading settings from `/etc/default/automysqlbackup`.
 
 Key environment variables:
 
-* `DBHOST`: hostname of PostgreSQL server
-* `USERNAME`: PostgreSQL username
-* `DBPASS`: PostgreSQL password
+* `DBHOST`: hostname of MySQL server
+* `USERNAME`: MySQL username
+* `DBPASS`: MySQL password
 * `DBNAMES`: space-separated list of DBs to back up (omit to back up everything)
 
-See `backup-postgresql` for a more complete list of variables.
+See `backup-mysql` for a more complete list of variables.
 
 You should mount these files from somewhere persistent:
 
