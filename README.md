@@ -10,10 +10,10 @@ Key environment variables:
 
 * `DBHOST`: hostname of MySQL server
 * `USERNAME`: MySQL username
-* `DBPASS`: MySQL password
+* `PASSWORD`: MySQL password
 * `DBNAMES`: space-separated list of DBs to back up (omit to back up everything)
 
-See `backup-mysql` for a more complete list of variables.
+See `backup-mysql` and configure-automysqlbackup for a more complete list of variables.
 
 You should mount these files from somewhere persistent:
 
