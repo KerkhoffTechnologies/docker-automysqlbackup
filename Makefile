@@ -1,27 +1,32 @@
 SHELL=/bin/bash
-buildversion=$(shell cat version)
-docker_what=automysqlbackup
-dockerhub_where=cpcurtis
-gcr_where=us.gcr.io
-#gcr_project=
+BUILDVERSION=$(shell cat version)
+DOCKER_WHAT=automysqlbackup
+DOCKERHUB_WHERE=cpcurtis
+GCR_WHERE=us.gcr.io
 
 .PHONY: all increment build latest push
 
 all: build
 
 increment:
-	echo $$(( $(buildversion) + 1 )) > version
+	echo $$(( $(BUILDVERSION) + 1 )) > version
 
 build:
-	docker build --force-rm=true -t $(dockerhub_where)/$(docker_what):$(buildversion) .
+	docker build --force-rm=true -t $(DOCKERHUB_WHERE)/$(DOCKER_WHAT):$(BUILDVERSION) .
 
 latest: build
-	docker tag $(dockerhub_where)/$(docker_what):$(buildversion) $(dockerhub_where)/$(docker_what):latest
+	docker tag $(DOCKERHUB_WHERE)/$(DOCKER_WHAT):$(BUILDVERSION) $(DOCKERHUB_WHERE)/$(DOCKER_WHAT):latest
 
-push: latest
-    ifdef $(gcr_project)
-	    docker tag $(dockerhub_where)/$(docker_what):latest $(gcr_where)/$(gcr_project)/$(docker_what):latest
-	    docker push $(gcr_where)/$(gcr_project)/$(docker_what):latest
-	endif
-	docker push $(dockerhub_where)/$(docker_what):$(buildversion)
-	docker push $(dockerhub_where)/$(docker_what):latest
+gcr:
+	# when building for a GCloud project. syntax:
+	# make push gcr_project=my_project/folder
+	$(info Checking for GCR_PROJECT)
+ifneq ($(GCR_PROJECT),)
+	docker tag $(DOCKERHUB_WHERE)/$(DOCKER_WHAT) $(GCR_WHERE)/$(GCR_PROJECT)/$(DOCKER_WHAT):$(BUILDVERSION)
+	docker tag $(DOCKERHUB_WHERE)/$(DOCKER_WHAT) $(GCR_WHERE)/$(GCR_PROJECT)/$(DOCKER_WHAT):latest
+	docker push $(GCR_WHERE)/$(GCR_PROJECT)/$(DOCKER_WHAT):latest
+endif
+
+push: latest gcr
+	docker push $(DOCKERHUB_WHERE)/$(DOCKER_WHAT):$(BUILDVERSION)
+	docker push $(DOCKERHUB_WHERE)/$(DOCKER_WHAT):latest
