@@ -15,7 +15,7 @@ Key environment variables:
 
 See `backup-mysql` and configure-automysqlbackup for a more complete list of variables.
 
-You should mount these files from somewhere persistent:
+These files should be mounted from somewhere persistent:
 
 * `/root/.ssh/authorized_keys`
 * `/etc/ssh/ssh_host_dsa_key`
@@ -26,3 +26,8 @@ You should mount these files from somewhere persistent:
 * `/etc/ssh/ssh_host_ed25519_key.pub`
 * `/etc/ssh/ssh_host_rsa_key`
 * `/etc/ssh/ssh_host_rsa_key.pub`
+
+
+#### Usage:
+
+ssh into the container and run `backup-mysql`.  Backup files will be placed in /backups or as defined by _${BACKUPDIR}_.
