@@ -10,12 +10,13 @@ Key environment variables:
 
 * `DBHOST`: hostname of MySQL server
 * `USERNAME`: MySQL username
-* `DBPASS`: MySQL password
+* `PASSWORD`: MySQL password
 * `DBNAMES`: space-separated list of DBs to back up (omit to back up everything)
+* `DBEXCLUDE`: space-separated list of DBs to exlcude (suggested "performance_schema" "information_schema")
 
-See `backup-mysql` for a more complete list of variables.
+See `backup-mysql` and configure-automysqlbackup for a more complete list of variables.
 
-You should mount these files from somewhere persistent:
+These files should be mounted from somewhere persistent:
 
 * `/root/.ssh/authorized_keys`
 * `/etc/ssh/ssh_host_dsa_key`
@@ -26,3 +27,8 @@ You should mount these files from somewhere persistent:
 * `/etc/ssh/ssh_host_ed25519_key.pub`
 * `/etc/ssh/ssh_host_rsa_key`
 * `/etc/ssh/ssh_host_rsa_key.pub`
+
+
+#### Usage:
+
+ssh into the container and run `backup-mysql`.  Backup files will be placed in /backups or as defined by _${BACKUPDIR}_.
