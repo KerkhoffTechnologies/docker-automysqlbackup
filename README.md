@@ -12,6 +12,7 @@ Key environment variables:
 * `USERNAME`: MySQL username
 * `PASSWORD`: MySQL password
 * `DBNAMES`: space-separated list of DBs to back up (omit to back up everything)
+* `DBEXCLUDE`: space-separated list of DBs to exlcude (suggested "performance_schema" "information_schema")
 
 See `backup-mysql` and configure-automysqlbackup for a more complete list of variables.
 
