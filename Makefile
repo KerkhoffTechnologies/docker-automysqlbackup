@@ -11,7 +11,7 @@ all: build
 increment:
 	echo $$(( $(BUILDVERSION) + 1 )) > version
 
-build:
+build: increment
 	docker build --force-rm=true -t $(DOCKERHUB_WHERE)/$(DOCKER_WHAT):$(BUILDVERSION) .
 
 latest: build
@@ -19,7 +19,7 @@ latest: build
 
 gcr:
 	# When also building for a GCloud project. CLI syntax is:
-	#     make push gcr_project=my_project/folder
+	#     make push GCR_PROJECT=my_project/folder
 	$(info Checking for GCR_PROJECT)
 ifneq ($(GCR_PROJECT),)
 	docker tag $(DOCKERHUB_WHERE)/$(DOCKER_WHAT) $(GCR_WHERE)/$(GCR_PROJECT)/$(DOCKER_WHAT):$(BUILDVERSION)
